@@ -129,6 +129,32 @@ client.on("message", message => {
     });
   }
 })
+client.on("message", message =>{
+   if (message.content == "!verify"){
+     const cha = client.channels.find("name", "verification")
+       if(message.channel.id == `${cha.id}`) {
+         const role = message.guild.roles.find("name", "Verified")
+      message.member.addRole(role.id)
+         message.member.removeRole("589161695138545693")
+   message.author.send("Verified Sucessfully").then(()=>{
+     message.delete()
+    
+     })
+     }else{
+       message.delete()
+       var ren = message.author.send("User Already Verified").then(() => {
+         ren.react("❌")
+       })
+       }
+   } else {
+const cha = client.channels.find("name", "verification")
+    if(message.channel.id == `${cha.id}`) {
+   if (message.content !== "!verify")
+     message.delete()
+    }
+   }
+ })
+
 // server.js
 // where your node app starts
 // init project
