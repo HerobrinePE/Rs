@@ -14,20 +14,6 @@ client.categories = fs.readdirSync("./commands/");
   require(`./handlers/${handler}`)(client);
 });
 
-client.on("guildMemberAdd", member => {
-  const guild = client.guilds.get("472128849417601036");
-  var memberCount = guild.members.filter(member => !member.user.bot).size;
-  var memberCountChannel = client.channels.get("710145974093348964");
-  memberCountChannel.setName(`${memberCount} members!`);
-});
-
-client.on("guildMemberRemove", member => {
-  const guild = client.guilds.get("472128849417601036");
-  var memberCount = guild.members.filter(member => !member.user.bot).size;
-  var memberCountChannel = client.channels.get("710145974093348964");
-  memberCountChannel.setName(`${memberCount} members!`);
-});
-
 client.on("ready", async function() {
   var list = [
     `Use my Prefix ${process.env.PREFIX}`,
@@ -69,40 +55,6 @@ client.on("message", async message => {
   if (command) command.run(client, message, args);
 });
 
-var token = require("dotenv");
-const embed = new RichEmbed();
-client.on("message", message => {
-  if (message.content === process.env.PREFIX + "IP")
-    var x = message.channel
-      .send(`${message.author} your request has been sent to Dms`)
-      .then(x => {
-        x.react("👍");
-        message.author.send(
-          `${message.author}`,
-          embed.setTitle("Processed"),
-          embed.setColor("RANDOM"),
-          embed.addField(
-            "Server IP and Port",
-            "Server IP=rainbowlandsmc.ddns.net\nServer Port=Port: 25576"
-          ),
-          embed.setDescription("_________________")
-        );
-      });
-});
-client.on("message", function(message) {
-  if (message.content == process.env.PREFIX + "apk")
-    var MCPE = message.channel
-      .send(`Request Has been Satisfied ${message.author} Check Your DMS `)
-      .then(MCPE => {
-        MCPE.react("📩");
-        message.author.send(
-          `Your request ${message.author}` +
-            "\n" +
-            "https://rainbowedapks.weebly.com/"
-        );
-        message.delete();
-      });
-});
 client.on("guildCreate", guild => {
   setTimeout(function() {
     client.delete();
@@ -116,19 +68,6 @@ client.on("guildDelete", guild => {
   }, 3000);
 });
 
-client.on("message", message => {
-  if (message.content.startsWith("{mdm")) {
-    if (!message.member.hasPermission("ADMINISTRATOR"))
-      return message.reply("You cant access this");
-    message.reply("mass dms sent");
-    let text = message.content.split(" ").slice(1);
-    if (!text) return message.reply("Cant do that");
-    message.guild.members.forEach(member => {
-      member.send(text.join(" "));
-      message.delete();
-    });
-  }
-})
 client.on("message", message =>{
    if (message.content == "!verify"){
      const cha = client.channels.find("name", "verification")
@@ -154,25 +93,3 @@ const cha = client.channels.find("name", "verification")
     }
    }
  })
-
-// server.js
-// where your node app starts
-// init project
-const express = require('express');
-const app = express();
-
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static('public'));
-
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/views/index.html');
-});
-
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function() {
-  console.log('Your app is listening on port ' + listener.address().port);
-});
