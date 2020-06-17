@@ -14,6 +14,11 @@ client.categories = fs.readdirSync("./commands/");
   require(`./handlers/${handler}`)(client);
 });
 
+client.on("guildMemberAdd", member => {
+let mem = member.guild.roles.find("name", "Unverified")
+member.addRole(mem)
+})
+
 client.on("ready", async function() {
   var list = [
     `Use my Prefix ${process.env.PREFIX}`,
