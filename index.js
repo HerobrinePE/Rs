@@ -13,7 +13,19 @@ client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
   require(`./handlers/${handler}`)(client);
 });
+client.on("guildMemberAdd", member => {
+  const guild = client.guilds.get("582032120319442944");
+  var memberCount = guild.members.filter(member => !member.user.bot).size;
+  var memberCountChannel = client.channels.get("722877208842207342");
+  memberCountChannel.setName(`${memberCount} members!`);
+});
 
+client.on("guildMemberRemove", member => {
+  const guild = client.guilds.get("582032120319442944");
+  var memberCount = guild.members.filter(member => !member.user.bot).size;
+  var memberCountChannel = client.channels.get("722877208842207342");
+  memberCountChannel.setName(`${memberCount} members!`);
+});
 client.on("guildMemberAdd", member => {
 let mem = member.guild.roles.find("name", "Unverified")
 member.addRole(mem)
