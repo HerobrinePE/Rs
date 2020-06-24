@@ -12,8 +12,11 @@ module.exports = {
   if(!tomute) return message.reply("Couldn't find user.");
   if(tomute.hasPermission("ADMINISTRATOR")) return message.reply("Can't mute them!");
   let muterole = message.guild.roles.find(`name`, "mute");
+      let x = message.guild.roles.find("Verified")
+      tomute.removeRole(x.id)
   if(!muterole){
     try{
+
       muterole = await message.guild.createRole({
         name: "mute",
         color: "#fffff",
