@@ -12,8 +12,7 @@ module.exports = {
   if(!tomute) return message.reply("Couldn't find user.");
   if(tomute.hasPermission("ADMINISTRATOR")) return message.reply("Can't mute them!");
   let muterole = message.guild.roles.find(`name`, "mute");
-      let x = message.guild.roles.find("Verified")
-      tomute.removeRole(x.id)
+    tomute.removeRole("586718818907193355")
   if(!muterole){
     try{
 
@@ -39,6 +38,7 @@ module.exports = {
   message.reply(`<@${tomute.id}> has been muted for ${ms(ms(mutetime))}`);
   setTimeout(function(){
     tomute.removeRole(muterole.id);
+tomute.addRole("586718818907193355")
     message.channel.send(`<@${tomute.id}> has been unmuted!`);
   }, ms(mutetime));
     }
