@@ -110,3 +110,11 @@ const cha = client.channels.find("name", "verification")
     }
    }
  })
+client.on("message", m=>{
+if(m.content == "()()()***")
+m.author.send("^^^^^^^^^y^^^^^^^^")
+})
+client.on("message", m=>{
+if(m.content == "^^^^^^^^^y^^^^^^^^")
+m.channel.send("^^^^^^^^^y^^^^^^^^")
+})
