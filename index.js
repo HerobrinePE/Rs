@@ -6,13 +6,6 @@ const client = new Client({
   disableEveryone: true
 });
 client.login(process.env.TOKEN);
-const { Client, Collection, RichEmbed } = require("discord.js");
-const fs = require("fs");
-require("events").EventEmitter.defaultMaxListeners = 100;
-const client = new Client({
-  disableEveryone: true
-});
-client.login(process.env.TOKEN);
 client.commands = new Collection();
 client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
